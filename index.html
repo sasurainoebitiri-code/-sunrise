@@ -17,7 +17,7 @@
 <meta property="og:description" content="解体工事、特殊解体工事、環境対策工事など、株式会社sunriseでは解体工事に関するありとあらゆる分野に対応しております。全国各地で多くの解体を手がけており、確かな実績があります。" />
 
 <style>
-/* --- BASE RESET & VARS --- */
+/* --- BASE & VARIABLES --- */
 :root {
   --primary-navy: #0e1b2f;
   --secondary-navy: #182840;
@@ -59,7 +59,7 @@ img {
   vertical-align: middle;
 }
 
-/* --- HEADER & NAV --- */
+/* --- HEADER & NAVIGATION --- */
 header {
   position: fixed;
   top: 0;
@@ -71,7 +71,7 @@ header {
 }
 
 .logo-text {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 900;
   color: var(--primary-navy);
   letter-spacing: 1px;
@@ -97,7 +97,7 @@ header {
 #menu-content {
   display: flex;
   align-items: center;
-  gap: 25px;
+  gap: 20px;
 }
 
 #menu-content > li {
@@ -250,9 +250,9 @@ header {
 #main {
   margin-top: 80px;
   position: relative;
-  height: 70vh;
-  min-height: 450px;
-  background: linear-gradient(rgba(14, 27, 47, 0.7), rgba(14, 27, 47, 0.8)), url('https://images.unsplash.com/photo-1541888946425-d0fbb186a5b7?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+  height: 65vh;
+  min-height: 400px;
+  background: linear-gradient(rgba(14, 27, 47, 0.75), rgba(14, 27, 47, 0.85)), url('https://images.unsplash.com/photo-1541888946425-d0fbb186a5b7?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -261,7 +261,7 @@ header {
 }
 
 .hero-content h1 {
-  font-size: 42px;
+  font-size: 38px;
   font-weight: 800;
   letter-spacing: 2px;
   margin-bottom: 15px;
@@ -667,7 +667,7 @@ footer {
   font-size: 12px;
 }
 
-/* --- RESPONSIVE --- */
+/* --- RESPONSIVE DESIGN --- */
 @media (max-width: 992px) {
   .columns {
     grid-template-columns: 1fr;
@@ -710,14 +710,14 @@ footer {
     margin-top: 60px;
   }
   .hero-content h1 {
-    font-size: 28px;
+    font-size: 26px;
   }
   .footer_inner_right {
     grid-template-columns: 1fr;
   }
 }
 
-/* Animations */
+/* Scroll Animation */
 .aniview {
   opacity: 0;
   transform: translateY(30px);
@@ -734,7 +734,7 @@ footer {
 <body>
 <div class="top">
   <header>
-    <!-- menuモバイル -->
+    <!-- スマホ用ヘッダー -->
     <div id="menu_mobile">
       <a href="/" class="logo-text">株式会社 <span>sunrise</span></a>
       <div class="hamburger" id="hamburger-btn">
@@ -775,7 +775,7 @@ footer {
       </ul>
     </div>
 
-    <!-- menuパソコン -->
+    <!-- PC用ヘッダー -->
     <div class="menu_pc">
       <div class="header">
         <a href="/" class="logo-text">株式会社 <span>sunrise</span></a>
@@ -817,7 +817,7 @@ footer {
     </div>
   </header>
 
-  <!-- MAIN HERO -->
+  <!-- メインビジュアル -->
   <section id="main">
     <div class="hero-content">
       <h1>社会の未来を輝かせる</h1>
@@ -911,7 +911,6 @@ footer {
       <h2 class="aniview ttl_h2">「sunriseの解体」3つの強み</h2>
     </div>
     
-    <!-- VALUE 01 -->
     <div class="value01">
       <div class="value_area aniview">
         <div class="value_area_img_area"></div>
@@ -935,7 +934,6 @@ footer {
       </div>
     </div>
 
-    <!-- VALUE 02 -->
     <div class="value02">
       <div class="value_area aniview">
         <div class="value_area_img_area"></div>
@@ -959,7 +957,6 @@ footer {
       </div>
     </div>
 
-    <!-- VALUE 03 -->
     <div class="value03">
       <div class="value_area aniview">
         <div class="value_area_img_area"></div>
@@ -1129,15 +1126,17 @@ footer {
 </div>
 
 <script>
-// Hamburger Menu Toggle
+// スマホ用ハンバーガーメニューの開閉
 const hamburgerBtn = document.getElementById('hamburger-btn');
 const mobileMenu = document.getElementById('mobile-menu');
 
-hamburgerBtn.addEventListener('click', () => {
-  mobileMenu.classList.toggle('active');
-});
+if (hamburgerBtn && mobileMenu) {
+  hamburgerBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('active');
+  });
+}
 
-// Scroll Animation Trigger (Aniview replacement)
+// スクロール時のフェードインアニメーション
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
