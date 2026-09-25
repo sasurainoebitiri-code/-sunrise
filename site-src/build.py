@@ -128,8 +128,20 @@ def faq_ld(h):
     return jsonld({"@context": "https://schema.org", "@type": "FAQPage",
                    "mainEntity": [{"@type": "Question", "name": clean(q), "acceptedAnswer": {"@type": "Answer", "text": clean(a)}} for q, a in items]})
 
+# 同じ名前のページとフォルダ（column.html と column/）があると GitHub Pages では /column が開けないため、
+# こうしたページはフォルダの index.html として書き出し、アドレスは /column/ にする。
+DIR_INDEX = {'column.html'}
+
+def pretty(file):
+    if file == 'index.html':
+        return ''
+    return file[:-5] + '/' if file in DIR_INDEX else file[:-5]
+
+def out_file(file):
+    return file[:-5] + '/index.html' if file in DIR_INDEX else file
+
 def url(file):
-    return (DOMAIN.rstrip('/') + '/' + ('' if file == 'index.html' else file[:-5])) if DOMAIN else None
+    return (DOMAIN.rstrip('/') + '/' + pretty(file)) if DOMAIN else None
 
 # Google Search Console の所有者確認タグ（HTMLタグ方式）。新しいプロパティ用のコードを追加するときはこのリストに足す。
 GSC_CODES = ['EHD7npFsME_y0lUbSd0gFg4Rdw76JanglOKxe1ocs6U']
@@ -138,7 +150,7 @@ GSC = '\n'.join(f'<meta name="google-site-verification" content="{c}">' for c in
 def clean_links(h):
     for k, p in list(PAGES.items()) + list(EXTRA.items()):
         if p['file'] != 'index.html':
-            h = h.replace(f'href="{p["file"]}"', f'href="{BASE}/{p["file"][:-5]}"')
+            h = h.replace(f'href="{p["file"]}"', f'href="{BASE}/{pretty(p["file"])}"')
     h = h.replace('href="index.html#', f'href="{BASE}/#').replace('href="index.html"', f'href="{BASE}/"')
     # absolute asset paths so nested pages (/column/...) work
     h = h.replace('href="assets/', f'href="{BASE}/assets/').replace('src="assets/', f'src="{BASE}/assets/')
@@ -307,7 +319,7 @@ for out in ['dist', 'preview']:
             doc = doc.replace('</head>', faq_ld(body(key)) + '\n</head>', 1)
         if is_dist:
             doc = clean_links(doc)
-        write(f'{out}/{p["file"]}', doc)
+        write(f'{out}/{out_file(p["file"]) if is_dist else p["file"]}', doc)
 
 # ---------- 404 ----------
 NOTFOUND = ('<main><div class="page" data-page="notfound"><header class="pg-hd w"><div class="pg-hd-l">\n'

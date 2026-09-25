@@ -1,0 +1,26 @@
+name: サイト監視（5分ごと）
+on:
+  schedule:
+    - cron: '*/5 * * * *'   # GitHub Actions で指定できる最短間隔（混雑時は遅れることがある）
+  workflow_dispatch:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+  issues: write
+concurrency:
+  group: site-monitor
+  cancel-in-progress: false
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: 公開直後は反映を待つ
+        if: github.event_name == 'push'
+        run: sleep 120
+      - name: 公開サイトを検査
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 ops/monitor.py
