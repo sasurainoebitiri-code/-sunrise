@@ -1,7 +1,7 @@
 # 株式会社sunrise ホームページ
 
-公開アドレス: https://sasurainoebitiri-code.github.io/-sunrise/
-（GitHub Pages。`main` ブランチの直下にあるファイルがそのまま公開されます）
+公開アドレス: https://sunrise-kaitai.github.io/
+（GitHub Pages。GitHub の組織 sunrise-kaitai にあるリポジトリ `sunrise-kaitai.github.io` の `main` ブランチ直下がそのまま公開されます）
 
 ## フォルダの見かた
 
@@ -22,10 +22,10 @@
 
 ## 注意
 
-- コラム一覧は `/-sunrise/column/`（末尾に / が付く）。GitHub Pages では同じ名前のページとフォルダが並ぶと開けないため、`build.py` の `DIR_INDEX` でフォルダの index.html として書き出しています。
+- コラム一覧は `/column/`（末尾に / が付く）。GitHub Pages では同じ名前のページとフォルダが並ぶと開けないため、`build.py` の `DIR_INDEX` でフォルダの index.html として書き出しています。
 
-- アドレスの途中にリポジトリ名 `/-sunrise` が入るため、`build.py` の `DOMAIN` から自動でパスの先頭に `/-sunrise` を付けています。
-  独自ドメインに移す場合は `DOMAIN` を変えるだけで全ページのパスが切り替わります。
+- サイト内のパスは `build.py` の `DOMAIN` から自動で決まります（アドレスの途中にフォルダ名が入る公開先でも、先頭に自動で付けます）。
+  独自ドメインに移す場合も `DOMAIN` を変えるだけで全ページのパスが切り替わります。
 - 会社概要などの未記入項目（`src/site.html` の `<span class="todo">[ …を入力 ]</span>`）は公開ページに出さない。値が決まったら書き換えると表示される。
 - 独自ドメインにするときは `build.py` の `DOMAIN` を変えるだけで、CNAME の作成と監視先の切り替えも自動で行われる。
 - Search Console の所有者確認コードは `build.py` の `GSC_CODES` に追加します。

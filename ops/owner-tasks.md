@@ -6,12 +6,31 @@
 
 ---
 
+## ⓪ 無料アドレス sunrise-kaitai.github.io への引っ越し（約5分・最初にお願いします）
+
+アドレスから「/-sunrise」が消え、会社名が入った短いアドレスになります。料金はかかりません。
+**①の Search Console 登録は、この引っ越しが終わってから行ってください**（新しいアドレスで登録するためです）。
+
+1. **組織を作る**：https://github.com/account/organizations/new?plan=free を開く
+   - 「Organization name」に `sunrise-kaitai` と入力（使えない場合は別の名前にして、Claude に教えてください）
+   - 「Contact email」にメールアドレスを入力し、「My personal account」を選ぶ →「Next」→「Complete setup」
+2. **リポジトリを組織へ移す**：https://github.com/sasurainoebitiri-code/-sunrise/settings を開き、いちばん下の「Transfer」
+   - 移動先に `sunrise-kaitai` を選び、確認欄に `sasurainoebitiri-code/-sunrise` と入力 →「I understand, transfer this repository」
+3. **リポジトリ名を変える**：移動後のリポジトリの「Settings」→「Repository name」を `sunrise-kaitai.github.io` に変えて「Rename」
+   - 続けて左メニューの「Pages」を開き、「Source」が「Deploy from a branch」、Branch が「main」「/ (root)」になっていることを確認（違っていたらそう設定して「Save」）
+4. **Claude がリポジトリに書き込めるようにする**：https://github.com/apps/claude/installations/select_target を開き、`sunrise-kaitai` を選んで「Install」（すでに入っている場合は「Configure」から `sunrise-kaitai.github.io` を許可）
+5. Claude に「引っ越し終わった」と送ってください。新しいアドレスで公開し直し、表示の確認まで行います。
+
+※ 2〜5 の間は、一時的にサイトの表示が崩れることがあります。まとめて続けて行うのがおすすめです。
+
+---
+
 ## ① Search Console に新しいアドレスを登録する（約5分）
 
 1. https://search.google.com/search-console を開く（いつもの Google アカウントで）
 2. 左上のプロパティ名 →「プロパティを追加」
 3. 右側の「URL プレフィックス」に次を貼り付けて「続行」
-   `https://sasurainoebitiri-code.github.io/-sunrise/`
+   `https://sunrise-kaitai.github.io/`
 4. 確認方法で「HTML タグ」を選び、「確認」を押す
    - サイトには、これまでと同じ確認タグを入れてあります。通ればそのまま次へ進んでください。
    - 通らない場合は、表示されたタグの `content="……"` の部分をコピーして Claude に送ってください。すぐにサイトへ追加します。
@@ -40,7 +59,7 @@
 | 店舗や事務所の住所 | 事務所に来店がない場合は「住所を表示しない」を選ぶ（住所自体は本人確認のために入力が必要です） |
 | サービス提供地域 | 愛知県、岐阜県、三重県、静岡県、滋賀県（または あま市・名古屋市 などの市区町村） |
 | 電話番号 | 090-7686-6461 |
-| ウェブサイト | https://sasurainoebitiri-code.github.io/-sunrise/ |
+| ウェブサイト | https://sunrise-kaitai.github.io/ |
 | 営業時間 | 実際の受付時間（サイトには「受付 8:00–18:00」と載せています） |
 
 **ビジネスの説明（コピーして貼り付け）**
@@ -58,9 +77,9 @@
 
 **写真**：現場の写真、重機、スタッフ、施工前・施工後の写真を10枚以上載せると効果的です。
 
-## ④ 独自ドメインを取る（年に数千円ほど）
+## ④ 独自ドメインを取る（年に数千円ほど・あとで大丈夫です）
 
-「sasurainoebitiri-code.github.io/-sunrise」より、会社名が入ったアドレスのほうが信頼されやすく、覚えてもらいやすくなります。
+無料の「sunrise-kaitai.github.io」でも十分に運用できますが、「.jp」などの独自ドメインにすると、さらに信頼されやすく、覚えてもらいやすくなります（余裕ができたときで大丈夫です）。
 
 1. お名前.com・ムームードメイン・Cloudflare などでドメインを購入します。
    - 候補の例：`sunrise-kaitai.jp`、`sunrise-kaitai.com`、`sunrise-ama.jp`（空いているかどうかは購入サイトで確認してください）

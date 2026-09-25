@@ -8,7 +8,7 @@ const PHOTOS = {
   excavator:[1,4,7,9,10], dawn:[9,1,10,4,7], debris:[1,7,4,10,9], stripes:[10,4,1],
   interior:[2,3,5,6,8], concrete:[6,5,8,3], rebar:[5,8,6], restore:[6,8,5,3]
 };
-const photo=n=>`/-sunrise/img/p${String(n).padStart(2,'0')}.webp`;
+const photo=n=>`/img/p${String(n).padStart(2,'0')}.webp`;
 
 document.documentElement.classList.add('js');
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -193,7 +193,7 @@ function startCycle(){
   const JP='壊すことから、次の朝をつくる職人たちがいる。',EN='CRAFTSMEN WHO CLEAR THE GROUND FOR THE NEXT MORNING OF THE CITY.';
   const POOL_JP=[...'解体更地朝職人壊次街重機養生分別基礎梁柱瓦壁床天井'],POOL_EN=[...'ABCDEFGHIJKLMNOPQRSTUVWXYZ#/\\_-=+*'];
   let W,H,dpr,mw,mh,noise,lines=[],logo,img,start=0,done=false;
-  const LOGO=new Image();LOGO.src='/-sunrise/img/logo-ink.png';
+  const LOGO=new Image();LOGO.src='/img/logo-ink.png';
   function vnoise(w,h,cell,rnd){
     const gw=Math.ceil(w/cell)+2,gh=Math.ceil(h/cell)+2,g=new Float32Array(gw*gh);for(let i=0;i<g.length;i++)g[i]=rnd();
     const out=new Float32Array(w*h),sm=t=>t*t*(3-2*t);
