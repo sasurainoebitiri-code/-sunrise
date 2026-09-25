@@ -2,6 +2,10 @@
 
 毎日のSEOチェック（毎朝8:52）の記録。新しい日付を上に追記する。
 
+## 2026-09-25（5回目）
+- https://sunrise-kaitai.github.io/ へ引っ越し・公開完了（監視も成功）。
+- Search Console: 新アドレスのプロパティを追加中。確認用ファイル google8acb34de16487f3d.html を設置（build.py の GSC_FILES。消さないこと）。
+
 ## 2026-09-25（4回目）
 - ユーザーの希望で、無料アドレス https://sunrise-kaitai.github.io/ へ移ることに決定。サイト・転送zip・手順書を新アドレス向けに更新（作業ブランチで準備。引っ越し完了後に公開）。
 

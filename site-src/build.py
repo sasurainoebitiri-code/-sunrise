@@ -145,6 +145,8 @@ def url(file):
 
 # Google Search Console の所有者確認タグ（HTMLタグ方式）。新しいプロパティ用のコードを追加するときはこのリストに足す。
 GSC_CODES = ['EHD7npFsME_y0lUbSd0gFg4Rdw76JanglOKxe1ocs6U']
+# Search Console の所有者確認ファイル（HTMLファイル方式）。消すと確認が外れるので残しておく。
+GSC_FILES = ['google8acb34de16487f3d.html']
 GSC = '\n'.join(f'<meta name="google-site-verification" content="{c}">' for c in GSC_CODES)
 
 def clean_links(h):
@@ -339,6 +341,8 @@ write('dist/404.html', clean_links(nf))
 
 # ---------- GitHub Pages: Jekyll を通さずそのまま公開 ----------
 write('dist/.nojekyll', '')
+for _f in GSC_FILES:
+    write('dist/' + _f, 'google-site-verification: ' + _f + '\n')
 # 独自ドメイン（例: https://sunrise-kaitai.jp）にしたときは GitHub Pages 用の CNAME を自動で置く
 if DOMAIN and not urlparse(DOMAIN).netloc.endswith('github.io'):
     write('dist/CNAME', urlparse(DOMAIN).netloc + '\n')

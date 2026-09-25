@@ -25,7 +25,7 @@ def target_exists(path):
 pages = []
 for root, _, files in os.walk(DIST):
     for fn in files:
-        if fn.endswith('.html'):
+        if fn.endswith('.html') and not re.match(r'google[0-9a-f]+\.html$', fn):   # Search Console の確認ファイルは対象外
             pages.append(os.path.join(root, fn))
 
 for f in sorted(pages):
