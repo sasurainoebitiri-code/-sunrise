@@ -20,7 +20,7 @@ IMG_EXT = 'webp'
 
 PAGES = {
   'index':    dict(file='index.html',
-                   title='愛知県あま市の解体工事・内装解体・原状回復｜株式会社sunrise',
+                   title='愛知県あま市の解体会社｜名古屋・愛知全域の解体工事・内装解体 株式会社sunrise',
                    desc='愛知県あま市の解体工事会社、株式会社sunrise。木造・鉄骨・RC造の建屋解体、内装解体（スケルトン工事）、オフィス・店舗の原状回復、アスベスト調査・除去に対応。名古屋市をはじめ愛知・岐阜・三重・静岡・滋賀で現地調査・お見積り無料。'),
   'building': dict(file='building.html', jp='建屋解体', en='Building Demolition',
                    title='建屋解体（木造・鉄骨・RC造）｜愛知県あま市の解体工事 株式会社sunrise',
