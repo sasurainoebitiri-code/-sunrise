@@ -54,6 +54,8 @@ for f in sorted(pages):
             json.loads(m)
         except Exception as e:
             errors.append(f'{rel}: 構造化データが壊れている {e}')
+    if re.search(r'\[ [^\]]*を入力 \]', doc):
+        errors.append(f'{rel}: 未記入の仮の文字（[ …を入力 ]）が残っている')
     if '404' not in rel:
         c = re.search(r'<link rel="canonical" href="([^"]+)"', doc)
         if not c:

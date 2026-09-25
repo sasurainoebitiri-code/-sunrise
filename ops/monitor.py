@@ -10,7 +10,10 @@
 import os, re, sys, json, time, html, urllib.request, urllib.error
 from urllib.parse import urljoin, urlparse
 
-SITE = 'https://sasurainoebitiri-code.github.io/-sunrise/'
+# 公開アドレスは site-src/build.py の DOMAIN から読む（独自ドメインに切り替えても自動で追従）
+_here = os.path.dirname(os.path.abspath(__file__))
+SITE = re.search(r"^DOMAIN = '([^']*)'", open(os.path.join(_here, '..', 'site-src', 'build.py'), encoding='utf-8').read(), re.M).group(1).rstrip('/') + '/'
+BASE_PATH = urlparse(SITE).path.rstrip('/')
 OLD = 'https://sunrise-kaitai.pages.dev'
 UA = {'User-Agent': 'sunrise-site-monitor/1.0'}
 SLOW = 5.0   # 秒。これより遅いページは警告
@@ -73,6 +76,8 @@ for u in urls:
         errors.append(f'canonical が正しくない（{c.group(1) if c else "なし"}）: {u}')
     if re.search(r'<meta name="robots" content="[^"]*noindex', d):
         errors.append(f'検索に出ない設定（noindex）が入っている: {u}')
+    if re.search(r'\[ [^\]]*を入力 \]', d):
+        errors.append(f'未記入の仮の文字（[ …を入力 ]）が表示されている: {u}')
     if len(re.findall(r'<h1\b', d)) != 1:
         warns.append(f'h1 が1つではない: {u}')
     for j in re.findall(r'<script type="application/ld\+json">(.*?)</script>', d, re.S):
@@ -82,7 +87,7 @@ for u in urls:
             errors.append(f'構造化データが壊れている: {u}')
     for ref in re.findall(r'\b(?:href|src)="([^"#]+)"', d):
         a = urljoin(u, html.unescape(ref))
-        if a.startswith(SITE.rstrip('/')) or urlparse(a).path.startswith('/-sunrise'):
+        if a.startswith(SITE.rstrip('/')) or (BASE_PATH and urlparse(a).path.startswith(BASE_PATH)):
             assets.add(a)
 
 for t, us in titles.items():

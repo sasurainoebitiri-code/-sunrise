@@ -252,6 +252,9 @@ def body(key):
     parts = [header, nav_h, '<main>', main, contact, '</main>', ft]
     b = '\n\n'.join(parts)
     b = rewrite(b, is_home)
+    # 未記入の項目（src/site.html の <span class="todo">[ …を入力 ]</span>）は公開ページに出さない。
+    # 値が決まったら src/site.html の該当行を書き換えれば自動で表示される。
+    b = re.sub(r'\n?[ \t]*<div><dt>[^<]*</dt><dd><span class="todo">.*?</span></dd></div>', '', b)
     b += '\n<script src="assets/main.js"></script>'
     return b
 
@@ -336,6 +339,9 @@ write('dist/404.html', clean_links(nf))
 
 # ---------- GitHub Pages: Jekyll を通さずそのまま公開 ----------
 write('dist/.nojekyll', '')
+# 独自ドメイン（例: https://sunrise-kaitai.jp）にしたときは GitHub Pages 用の CNAME を自動で置く
+if DOMAIN and not urlparse(DOMAIN).netloc.endswith('github.io'):
+    write('dist/CNAME', urlparse(DOMAIN).netloc + '\n')
 
 # ---------- cache headers (Cloudflare Pages のみ有効。GitHub Pages では publish.sh が除外) ----------
 write('dist/_headers', "/assets/*\n  Cache-Control: public, max-age=604800\n/img/*\n  Cache-Control: public, max-age=2592000\n"
