@@ -11,6 +11,7 @@
 | 直下の `*.html`, `assets/`, `img/`, `column/`, `sitemap.xml` など | `publish.sh` が作る公開用ファイル。**直接編集しない** |
 | `redirect-cloudflare/` | 旧アドレス sunrise-kaitai.pages.dev → 新アドレスへの転送用 zip |
 | `ops/seo-log.md` | 毎日のSEOチェックの記録 |
+| `ops/monitor.py`, `.github/workflows/site-monitor.yml` | 公開サイトの自動監視（5分ごと）。異常があると Issue「サイト監視: 異常あり」が立ち、直ると自動で閉じる |
 
 ## 更新のしかた
 
@@ -19,6 +20,8 @@
 3. `main` に commit / push すると、数分で公開サイトに反映
 
 ## 注意
+
+- コラム一覧は `/-sunrise/column/`（末尾に / が付く）。GitHub Pages では同じ名前のページとフォルダが並ぶと開けないため、`build.py` の `DIR_INDEX` でフォルダの index.html として書き出しています。
 
 - アドレスの途中にリポジトリ名 `/-sunrise` が入るため、`build.py` の `DOMAIN` から自動でパスの先頭に `/-sunrise` を付けています。
   独自ドメインに移す場合は `DOMAIN` を変えるだけで全ページのパスが切り替わります。
