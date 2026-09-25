@@ -7,7 +7,7 @@ import re, json, os, shutil, html
 import extra
 
 SRC = open('src/site.html', encoding='utf-8').read()
-DOMAIN = 'https://sasurainoebitiri-code.github.io/-sunrise'
+DOMAIN = 'https://sunrise-kaitai.github.io'
 # GitHub Pages のプロジェクトサイトはアドレスの途中にフォルダ名（/-sunrise）が入るため、
 # サイト内の絶対パス（/img/… や /building など）の先頭にこれを付ける。
 from urllib.parse import urlparse
