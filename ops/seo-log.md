@@ -2,6 +2,9 @@
 
 毎日のSEOチェック（毎朝8:52）の記録。新しい日付を上に追記する。
 
+## 2026-09-25（6回目）
+- 検索結果の見た目の改善: トップに WebSite 構造化データ（サイト名「株式会社sunrise」）を追加、会社情報にロゴ・写真を追加。反映は Google の再クロール後（数日〜数週間）。
+
 ## 2026-09-25（5回目）
 - https://sunrise-kaitai.github.io/ へ引っ越し・公開完了（監視も成功）。
 - Search Console: 新アドレス（URLプレフィックス https://sunrise-kaitai.github.io/）の所有者確認完了（HTMLファイル方式。確認用ファイル google8acb34de16487f3d.html は build.py の GSC_FILES。消さないこと）。sitemap.xml 送信済み（ユーザー操作）。

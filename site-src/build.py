@@ -180,8 +180,17 @@ def head(key):
     lines.append('<link rel="stylesheet" href="assets/style.css">')
     org = dict(ORG)
     if DOMAIN:
-        org["url"] = DOMAIN
+        root = DOMAIN.rstrip('/') + '/'
+        org["url"] = root
+        # 検索結果に会社のロゴ・写真を出すための情報
+        org["logo"] = root + 'img/apple-touch-icon.png'
+        org["image"] = root + 'img/p01.jpg'
     lines.append(jsonld(org))
+    if key == 'index' and DOMAIN:
+        # 検索結果の上に URL ではなく「株式会社sunrise」とサイト名を出すための情報
+        lines.append(jsonld({"@context": "https://schema.org", "@type": "WebSite",
+                             "name": "株式会社sunrise", "alternateName": "sunrise",
+                             "url": DOMAIN.rstrip('/') + '/', "inLanguage": "ja"}))
     if key != 'index':
         trail = [('トップ', url('index.html'))]
         if 'col' in p:
