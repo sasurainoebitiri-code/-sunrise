@@ -1,0 +1,4 @@
+site-src/dist/
+site-src/preview/
+__pycache__/
+*.pyc

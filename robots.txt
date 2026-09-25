@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://sasurainoebitiri-code.github.io/-sunrise/sitemap.xml
