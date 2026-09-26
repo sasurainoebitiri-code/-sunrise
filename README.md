@@ -7,7 +7,7 @@
 
 | 場所 | 中身 |
 |---|---|
-| `site-src/` | サイトの元データ。`src/site.html`（デザイン・トップ・サービスページ）、`extra.py`（対応エリア・FAQ・コラム記事）、`build.py`（ページを組み立てる）、画像 |
+| `site-src/` | サイトの元データ。`src/site.html`（デザイン・トップ・サービスページ）、`extra.py`（対応エリア・FAQ・コラム記事）、`service_detail.py`（サービス4ページの詳しい解説）、`region.py`（地域ページ：あま市・名古屋市・海部津島。出典つき）、`build.py`（ページを組み立てる）、画像 |
 | 直下の `*.html`, `assets/`, `img/`, `column/`, `sitemap.xml` など | `publish.sh` が作る公開用ファイル。**直接編集しない** |
 | `redirect-cloudflare/` | 旧アドレス sunrise-kaitai.pages.dev → 新アドレスへの転送用 zip |
 | `ops/seo-log.md` | 毎日のSEOチェックの記録 |
