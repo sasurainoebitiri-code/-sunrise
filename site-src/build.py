@@ -157,6 +157,9 @@ def clean_links(h):
     # absolute asset paths so nested pages (/column/...) work
     h = h.replace('href="assets/', f'href="{BASE}/assets/').replace('src="assets/', f'src="{BASE}/assets/')
     h = h.replace('src="img/', f'src="{BASE}/img/').replace('href="img/', f'href="{BASE}/img/')
+    # <picture><source srcset="img/…"> も絶対パスに。公開用は写真を webp で置くので拡張子も合わせる
+    h = re.sub(r'srcset="img/(p\d+)\.jpg"', lambda m: f'srcset="{BASE}/img/{m.group(1)}.{IMG_EXT}"', h)
+    h = h.replace('srcset="img/', f'srcset="{BASE}/img/')
     return h
 
 def head(key):
