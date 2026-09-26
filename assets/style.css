@@ -749,5 +749,10 @@ h1,h2,h3,.svc-lead,.pg-lead,.a-jp,.rec-lead{word-break:auto-phrase;text-wrap:bal
 .col-card:hover b{color:var(--sun-d)}
 .col-card:hover .ph img{transform:scale(1.04)}
 .ft-links{display:flex;gap:20px;flex-wrap:wrap}
+/* ---------- サービスページの解説表・地域ページへのリンク ---------- */
+.art .tb-wrap th{white-space:normal;width:36%}
+.art .tb-wrap tr:first-child th{background:var(--ink);color:#fff}
+.map-reg a{text-decoration:underline;text-underline-offset:3px}
+.ft-reg{flex-basis:100%;display:flex;gap:8px 20px;flex-wrap:wrap}
 @media (max-width:960px){.col-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:560px){.col-grid{grid-template-columns:1fr}.art th{white-space:normal;width:34%}}
