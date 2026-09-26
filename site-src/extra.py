@@ -75,6 +75,10 @@ def area_page():
     {P('株式会社sunriseは、愛知県あま市を拠点に、名古屋市をはじめとする愛知県全域と、岐阜県・三重県・静岡県・滋賀県で建屋解体・内装解体・原状回復・アスベスト調査・除去を行っています。拠点のあま市から近い海部・津島エリアや名古屋市西部は、急ぎのご相談にも対応しやすい地域です。')}
   </section>
   <section class="pg-sec w">
+    <div class="pg-sec-hd"><h2>REGION</h2><p>地域別のご案内（補助金・届出先）</p></div>
+    <ul class="art-list"><li><a href="area-ama.html">あま市の解体工事｜補助金3制度と届出先</a></li><li><a href="area-nagoya.html">名古屋市の解体工事｜助成制度と区ごとの届出先</a></li><li><a href="area-ama-tsushima.html">海部・津島エリアの解体工事｜津島市・愛西市・弥富市・蟹江町・大治町・飛島村</a></li></ul>
+  </section>
+  <section class="pg-sec w">
     <div class="pg-sec-hd"><h2>AICHI</h2><p>愛知県の対応エリア</p></div>
     <div class="art"><div class="tbl"><table class="area-tb">{rows}</table></div>
     {P('上記以外の愛知県内の市町村も対応しています。')}
@@ -378,6 +382,11 @@ EXTRA_CSS = r'''
 .col-card:hover b{color:var(--sun-d)}
 .col-card:hover .ph img{transform:scale(1.04)}
 .ft-links{display:flex;gap:20px;flex-wrap:wrap}
+/* ---------- サービスページの解説表・地域ページへのリンク ---------- */
+.art .tb-wrap th{white-space:normal;width:36%}
+.art .tb-wrap tr:first-child th{background:var(--ink);color:#fff}
+.map-reg a{text-decoration:underline;text-underline-offset:3px}
+.ft-reg{flex-basis:100%;display:flex;gap:8px 20px;flex-wrap:wrap}
 @media (max-width:960px){.col-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:560px){.col-grid{grid-template-columns:1fr}.art th{white-space:normal;width:34%}}
 '''

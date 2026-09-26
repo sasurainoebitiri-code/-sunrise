@@ -5,6 +5,8 @@ Build the sunrise site from src/site.html (single-file source) into:
 """
 import re, json, os, shutil, html
 import extra
+import service_detail   # サービス4ページの詳しい解説（対応物件・費用の要素・近隣対策・トラブル）
+import region           # 地域ページ（あま市・名古屋市・海部津島）
 
 SRC = open('src/site.html', encoding='utf-8').read()
 DOMAIN = 'https://sunrise-kaitai.github.io'
@@ -47,6 +49,10 @@ EXTRA = {
                  title='解体工事コラム｜補助金・アスベスト・費用・手続き 株式会社sunrise',
                  desc='解体工事の補助金、アスベスト事前調査、費用が決まるポイント、解体前後の手続き、原状回復とスケルトン工事の違いなど、解体の前に知っておきたいことを愛知県あま市の解体業者が解説します。'),
 }
+# 地域ページ：/area-ama など（area.html と同じ名前のフォルダを作らないよう、フォルダにせずファイル名で分ける）
+for _r in region.REGIONS:
+    EXTRA['area-' + _r['slug']] = dict(file='area-%s.html' % _r['slug'], jp=_r['jp'], en='Area',
+                                       title=_r['title'], desc=_r['desc'], reg=_r)
 for _c in extra.COLUMNS:
     EXTRA['col-' + _c['slug']] = dict(file='column/%s.html' % _c['slug'], jp=_c['short'], en='Column',
                                       title=_c['title'] + '｜株式会社sunrise', desc=_c['desc'], col=_c)
@@ -198,6 +204,8 @@ def head(key):
         trail = [('トップ', url('index.html'))]
         if 'col' in p:
             trail.append(('コラム', url('column.html')))
+        if 'reg' in p:
+            trail.append(('対応エリア', url('area.html')))
         trail.append((p['jp'], u))
         crumbs = [{"@type": "ListItem", "position": i + 1, "name": n, "item": it} for i, (n, it) in enumerate(trail)]
         lines.append(jsonld({"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": crumbs}))
@@ -230,6 +238,8 @@ def body(key):
         p = EXTRA[key]
         if key == 'area':
             main = extra.area_page()
+        elif 'reg' in p:
+            main = region.page(p['reg'])
         elif key == 'faq':
             sf = []
             for k in SVC:
@@ -249,6 +259,8 @@ def body(key):
         if WITH_EXTRA:
             main = main.replace('  <section class="pg-sec w">\n    <div class="pg-sec-hd"><h2>OTHER</h2>',
                                 extra.related_block(key) + '  <section class="pg-sec w">\n    <div class="pg-sec-hd"><h2>OTHER</h2>', 1)
+            # 詳しい解説（対応物件・費用の要素・近隣対策・トラブル）を「お見積り」の前に入れる
+            main = main.replace('  <section class="pg-cta w">', service_detail.service_detail(key) + '  <section class="pg-cta w">', 1)
         main = re.sub(r'<h1 class="pg-title">(.*?)</h1>',
                       lambda m: f'<h1 class="pg-title">{m.group(1)}<span class="sr">{p["jp"]}｜愛知県あま市の解体工事 株式会社sunrise</span></h1>',
                       main, count=1)
@@ -261,8 +273,13 @@ def body(key):
     if WITH_EXTRA:
         ft = ft.replace('<a href="#contact">Contact</a></nav>',
                         '<a href="area.html">Area</a><a href="faq.html">FAQ</a><a href="column.html">Column</a><a href="#contact">Contact</a></nav>', 1)
+        # 地域ページへのリンク（フッター）
+        ft = ft.replace('</nav>\n  </div>', '</nav>\n    <nav class="ft-reg" aria-label="地域別のご案内">'
+                        + ''.join(f'<a href="{f}">{t}</a>' for f, t in region.LINK_LABELS) + '</nav>\n  </div>', 1)
         if is_home:
-            main = main.replace('<p class="map-src">', '<p><a class="more" href="area.html">対応市町村を見る <i>→</i></a></p>\n    <p class="map-src">', 1)
+            main = main.replace('<p class="map-src">', '<p><a class="more" href="area.html">対応市町村を見る <i>→</i></a></p>\n    '
+                                '<p class="map-note map-reg">地域別のご案内：' + '／'.join(f'<a href="{f}">{t}</a>' for f, t in region.LINK_LABELS)
+                                + '</p>\n    <p class="map-src">', 1)
     parts = [header, nav_h, '<main>', main, contact, '</main>', ft]
     b = '\n\n'.join(parts)
     b = rewrite(b, is_home)
@@ -371,7 +388,7 @@ if DOMAIN:
     today = datetime.date.today().isoformat()
     sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     for key, p in list(PAGES.items()) + list(EXTRA.items()):
-        pr = '1.0' if key == 'index' else ('0.8' if key in SVC else ('0.7' if key in ('area', 'faq', 'column') else '0.6'))
+        pr = '1.0' if key == 'index' else ('0.8' if key in SVC else ('0.7' if (key in ('area', 'faq', 'column') or key.startswith('area-')) else '0.6'))
         sm += f'  <url><loc>{url(p["file"])}</loc><lastmod>{today}</lastmod><priority>{pr}</priority></url>\n'
     sm += '</urlset>\n'
     open('dist/sitemap.xml', 'w').write(sm)
